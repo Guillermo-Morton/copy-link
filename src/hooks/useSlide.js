@@ -12,18 +12,19 @@ const useSlide = (position, from)=> {
         back: `animate__animated ${sliding ? 'animate__fadeOutDown' : 'animate__fadeInDown'}`,
         next: `animate__animated ${sliding ? 'animate__fadeOutUp' : 'animate__fadeInUp'}`
     }
-    const goNext = (params='') => {
+    const goNext = (params='', delay) => {
         setSlideManager({sliding:true, direction:'next'})
         setTimeout(()=> {
             const route = routes[position+1].route
             navigate(route + params, {state:'next'})
-        },500)
+        },delay ?? 500)
     }
-    const goBack= (params) => {
+    const goBack= (params='', delay) => {
         setSlideManager({sliding:true, direction:'back'})
         setTimeout(()=> {
-            navigate(routes[position-1].route, {state:'back'})
-        },500)
+            const route = routes[position-1].route
+            navigate(route + params, {state:'back'})
+        },delay ?? 500)
     }
     return {goBack, goNext, sliding, animation: animation[direction]}
 }

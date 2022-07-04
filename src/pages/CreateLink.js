@@ -5,10 +5,11 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const CreateLink = ({ position }) => {
   const { state } = { ...useLocation() }
-  const { goBack, goNext, animation } = useSlide(position, state)
+  const { goBack, goNext, animation, sliding } = useSlide(position, state)
   const [link, setLink] = useState()
   const [params, setParams] = useState()
   const [copied, setCopied] = useState(false)
+  const animationClass= animation + (sliding ? ' animate__delay-08s' : '')
   const handleSubmit = (e) => {
     e.preventDefault()
     const text = e.currentTarget.elements.text.value
@@ -17,7 +18,7 @@ const CreateLink = ({ position }) => {
     setLink(link)
   }
   return (
-    <div className={`${animation} w-full flex flex-col items-center justify-center`}>
+    <div className={`${copied ? animationClass : animation} w-full flex flex-col items-center justify-center`}>
       {link ?
         <div>
           <h1 className='font-extrabold sm:text-7xl text-4xl text-center m-4'>
@@ -27,13 +28,13 @@ const CreateLink = ({ position }) => {
                 <span className='text-accent'>Copied!</span>
               </span> : 
               <span>
-                <span className='text-accent'>Tap</span> your link to <span className='text-accent'>copy</span>
+                <span className='text-accent'>Tap</span> on your link. <span className='text-accent'>Share</span> it
               </span>
             }
             
           </h1>
           <CopyToClipboard text={link} onCopy={() => setCopied(true)}>
-            <button type='button' onClick={() => goNext(params)} className='text-center w-full p-1 hover:text-accent'>{link?.length > 40 ? link.substring(0, 40) + '...' : link}</button>
+            <button type='button' onClick={() => goNext(params, 1300)} className='text-center w-full p-1 hover:text-accent'>{link?.length > 40 ? link.substring(0, 40) + '...' : link}</button>
           </CopyToClipboard>
         </div>
         :
@@ -48,7 +49,7 @@ const CreateLink = ({ position }) => {
           </form>
         </div>
       }
-      <button type='button' className={`${animation} button`} onClick={goBack}>Back</button>
+      <button type='button' className='button' onClick={()=> goBack()}>Back</button>
     </div>
   );
 };

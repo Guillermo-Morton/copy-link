@@ -12,10 +12,10 @@ const CopyLink = ({position}) => {
         <div className={`${animation} w-full flex flex-col items-center justify-center`}>
             {copied ?  
             <h1 className='font-extrabold sm:text-7xl text-4xl text-center m-4'>
-               You <span className='text-accent'>Got</span> it
+               That's <span className='text-accent'>it</span>
             </h1>:
             <h1 className='font-extrabold sm:text-7xl text-4xl text-center m-4'>
-                <span className='text-accent'>Copying</span> it's really that <span className='text-accent'>easy</span>
+                <span className='text-accent'>Copying</span> a text is really that <span className='text-accent'>easy</span>
             </h1> 
             }
            
@@ -24,7 +24,8 @@ const CopyLink = ({position}) => {
                     <p className='text-left break-words p-1'>{text}</p>
                 </div>
             </CopyToClipboard>
-            <p className='text-sm mt-5'>{copied ? 'Copied!' : 'Tap the text to copy'}</p>
+            <p className='text-sm mt-5 text-center px-10'>{copied ? 'Copied!' : 'Tap the text to copy. Be careful, it will overwrite your current clipboard'}</p>
+            <button type='button' className='button' onClick={()=> goBack()}>Create new link</button>
         </div>
     );
 };
