@@ -7,15 +7,32 @@ const CreateLink = ({ position }) => {
   const { state } = { ...useLocation() }
   const { goBack, goNext, animation, sliding } = useSlide(position, state)
   const [link, setLink] = useState()
+  const [error, setError] = useState('')
   const [params, setParams] = useState()
   const [copied, setCopied] = useState(false)
   const animationClass= animation + (sliding ? ' animate__delay-08s' : '')
+  const inputValidator = (string) => {
+    const errors = []
+    if(string.includes('/')) {
+      errors.push('Character: "/" is invalid')
+    }
+    if(string.length === 0) {
+      errors.push('You need to write something first')
+    }
+    return errors
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
     const text = e.currentTarget.elements.text.value
+    const errors = inputValidator(text)
     const link = `${window.location.origin}/copylink/${text}`
-    setParams(text)
-    setLink(link)
+    if(!errors.length) {
+      setParams(text)
+      setLink(link)
+    } else {
+      e.target.reset()
+      setError(errors[0])
+    }
   }
   return (
     <div className={`${copied ? animationClass : animation} w-full flex flex-col items-center justify-center`}>
@@ -39,7 +56,7 @@ const CreateLink = ({ position }) => {
         </div>
         :
 
-        <div>
+        <div className='flex flex-col items-center'>
           <h1 className='font-extrabold sm:text-7xl text-4xl text-center m-4'>
             <span className='text-accent'>Create</span> a new link in one <span className='text-accent'>step</span>
           </h1>
@@ -47,6 +64,7 @@ const CreateLink = ({ position }) => {
             <input id='text' name='text' autoComplete='off' placeholder='Type some text' className='bg-secondary rounded-l-lg focus:outline-none px-3 py-1 flex-grow' type="text" />
             <button type='submit' className='button m-0 text-base rounded-l-none'>Create</button>
           </form>
+          <small>{error}</small>
         </div>
       }
       <button type='button' className='button' onClick={()=> goBack()}>Back</button>

@@ -15,7 +15,7 @@ const CopyLink = ({position}) => {
                That's <span className='text-accent'>it</span>
             </h1>:
             <h1 className='font-extrabold sm:text-7xl text-4xl text-center m-4'>
-                <span className='text-accent'>Copying</span> a text is really that <span className='text-accent'>easy</span>
+                <span className='text-accent'>Yeah</span>, is really that <span className='text-accent'>easy</span>
             </h1> 
             }
            

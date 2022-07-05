@@ -11,7 +11,7 @@ const Landing = ({position}) => {
  
     return (
         <div className={`${animation} w-full flex flex-col items-center justify-center`}>
-            <h1 className='font-extrabold sm:text-7xl text-5xl text-center m-4'><span className='text-accent'>Copy</span> a text was never that <span className='text-accent'>easy</span></h1>
+            <h1 className='font-extrabold sm:text-7xl text-5xl text-center m-4'><span className='text-accent'>Copying</span> a text was never that <span className='text-accent'>easy</span></h1>
             <button onClick={() => goNext()} className={`${animationButton} button font-bold text-xl`}>Start</button>
         </div>
     );

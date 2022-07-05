@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import routes from './routes'
 
 const ComponentWrapper = ({ Component, position }) => (
@@ -13,6 +13,7 @@ const Router = () => {
             {routes.map(({route, as, Component, position, params}) => (
                 <Route key={as} path={route + params} element={<ComponentWrapper {...{position, Component}} />} />
             ))}
+             <Route path="*" element={<Navigate to={routes[0].route} replace />} />
         </Routes>
     );
 };

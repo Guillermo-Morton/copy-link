@@ -8,7 +8,8 @@ const routes = Object.keys(pages).map((e,i) => {
         as: e,
         Component,
         position: i,
-        params
+        params,
+        default: i ? false : true
     })
 })
 console.log(routes)
