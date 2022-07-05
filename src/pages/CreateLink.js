@@ -56,7 +56,7 @@ const CreateLink = ({ position }) => {
         </div>
         :
 
-        <div className='flex flex-col items-center'>
+        <div>
           <h1 className='font-extrabold sm:text-7xl text-4xl text-center m-4'>
             <span className='text-accent'>Create</span> a new link in one <span className='text-accent'>step</span>
           </h1>
@@ -64,7 +64,7 @@ const CreateLink = ({ position }) => {
             <input id='text' name='text' autoComplete='off' placeholder='Type some text' className='bg-secondary rounded-l-lg focus:outline-none px-3 py-1 flex-grow' type="text" />
             <button type='submit' className='button m-0 text-base rounded-l-none'>Create</button>
           </form>
-          <small>{error}</small>
+          <p className='text-sm mt-5 text-center px-10'>{error}</p>
         </div>
       }
       <button type='button' className='button' onClick={()=> goBack()}>Back</button>
